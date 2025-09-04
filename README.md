@@ -2,16 +2,12 @@
 This will be your portfolio repository. Use this as a [template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository) and customize it to your own tastes. We gave you a starting point with a space to describe yourself and a link to where your assignment 1 file can be.
 
 # About Me
-*My name is Amber Horvath, I'm a postdoctoral associate researching code comprehension interventions, it's nice to meet you! [Here is a link to my real website.](https://amberhorvath.com)
-Now you should write something about yourself here!*
+*My name is Ananya Ganesh, I'm a junior at Wellesley majoring in CS and Neuroscience. My main interests (as of now) lie in HCI and wearable health tech!*
 
 Some fun facts about me:
-1. I love hockey.
-2. I do pottery.
-3. I have an extra bone in my right foot.
-
-![picture of snow leopard mama and baby](https://pbs.twimg.com/media/GzYlia3XMAAWfm4?format=jpg&name=4096x4096)
-
+- I'm fluent in 3 languages 
+- I love hiking/trekking/anything outdoors
+- I've swum with elephants and given them baths!
 
 # Table of Contents
 [Link to Assignment 1](assignments/assignment1.md)
