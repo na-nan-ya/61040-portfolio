@@ -10,4 +10,4 @@ Some fun facts about me:
 - I've swum with elephants and given them baths!
 
 # Table of Contents
-[Link to Assignment 1](assignments/assignment1.md)
+[Link to Assignment 1](assignments/6.1040%20assignment%201.pdf)
