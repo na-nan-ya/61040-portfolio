@@ -36,11 +36,12 @@ surpriseMe(registry: Registry):
    **effects** hides the item count for all requests
 
 In the gift giver’s case, I would modify the purchase action as follows:  
+
 purchase (purchaser: User, registry: Registry, item: Item, count: Number, ***surpriseOwner: Boolean***)  
    **requires** registry exists, is active and has a request for this item with at least count  
    **effects** create a new purchase for this purchaser, item and count  
-and decrement the count in the matching request;  
-***hides the count from the registry owner if surpriseOwner \== True.***
+				and decrement the count in the matching request;
+				***hides the count from the registry owner if surpriseOwner \== True.***
 
 7. *Generic types*
 
@@ -54,13 +55,13 @@ Just as the example says, the Item type might be populated by SKU codes or  orga
 	   a password String
 
 2\. **actions**  
-	register(username: String, password: String): (user: User)  
-	   **requires** username does not exist  
-	   **effects** creates a new user
+register(username: String, password: String): (user: User)  
+   **requires** username does not exist  
+   **effects** creates a new user
 
-	authenticate(username: String, password: String): (user: User)  
-	   **requires** username exists and password matches username  
-	   **effects** logs in user to previously created account
+authenticate(username: String, password: String): (user: User)  
+	**requires** username exists and password matches username  
+	**effects** logs in user to previously created account
 
 3\. No two users can have the same username. It is preserved by the register action which requires that a username given by a new user does not already exist, i.e. it is not already associated with a different user.
 
@@ -78,42 +79,45 @@ Just as the example says, the Item type might be populated by SKU codes or  orga
 	   a Password  
 	    
 **actions**  
-	register(username: String, password: String, email: String): (user: User, token: Token)  
-	   **requires** email is not already registered and username does not exist  
-	   **effects** emails a secret token to the user’s email address
+register(username: String, password: String, email: String): (user: User, token: Token)  
+   **requires** email is not already registered and username does not exist  
+   **effects** emails a secret token to the user’s email address
 
-	confirm(username: String, token: Token): (user: User)  
-	   **requires** the token provided by the user matches the token sent by email  
-	   **effects** registers user by creating a new account 
+confirm(username: String, token: Token): (user: User)  
+	**requires** the token provided by the user matches the token sent by email  
+	**effects** registers user by creating a new account 
 
-	authenticate(username: String, password: String): (user: User)  
-	   **requires** username exists and password matches username  
-	   **effects** logs in user to previously created account
+authenticate(username: String, password: String): (user: User)  
+	**requires** username exists and password matches username  
+	**effects** logs in user to previously created account
 
 **Exercise 3: Comparing Concepts**
 
 **concept** PersonalAccessToken  
 **purpose** reduce user authentication vulnerabilities with short-term, limited access password equivalents  
-**principle** 
+**principle** a user generates a new PAT with a given expiration date and description;
+			  they can create the token with specific access permissions;
+	 		  the token expires after the given date, leading the user to generate
+	  		  a new one if desired.
 
 **state**   
-	a set of Users with  
-	   a unique username String  
-	   a set of personal access Tokens
+a set of Users with  
+   a unique username String  
+   a set of personal access Tokens
 
-	a set of Tokens with  
-	   a name String  
-	   an Expiration date  
-	   a set of access Permissions  
+a set of Tokens with  
+   a name String  
+   an Expiration date  
+   a set of access Permissions  
 	
 
 **actions**  
-	createToken(username: String, name: String, date: Expiration, access: Permissions): (token: Token)  
-	   **requires** an existing account associated with the username  
-	   **effects** generates and returns a new token associated with username
+createToken(username: String, name: String, date: Expiration, access: Permissions): (token: Token)  
+   **requires** an existing account associated with the username  
+   **effects** generates and returns a new token associated with username
 
-	deleteToken(token: Token)  
-	   **effects** removes Token from set of Tokens associated with username
+deleteToken(token: Token)  
+   **effects** removes Token from set of Tokens associated with username
 
 When the article says ‘Treat your access tokens like passwords’, I think the author intends to emphasise the need to keep them safe and private the way we know how to handle passwords; not that they have the same purpose or operational principle. From my understanding, passwords are used for user authentication and account access, but they are not very secure as they're rarely updated and grant a third party unrestricted access to the user’s entire account if compromised. On the other hand, Personal Access Tokens (PATs) are much more secure since they can be limited to specific actions (like API access or certain repositories), and have fixed expiration dates which can prevent long-term damage if leaked to malicious third parties.
 
@@ -128,88 +132,88 @@ I think the Github page could elaborate more on why  a PAT is a much more secure
 **principle** an employee selects an existing project of their company’s,  
 	and initiates a billable session to work with the software  
 	by recording the start time of the session;  
-the company can customise how long a session can run uninterrupted  
+	the company can customise how long a session can run uninterrupted  
 	and the session is paused when that limit is reached;  
 	the employee can resume the session if they are still using the software;  
 	finally the employee records the end time to conclude the session.  
 		  
 **state**   
-	a set of Clients with  
-	   a set of Users  
-	   a set of Projects  
-	   an inactivity duration Limit
+a set of Clients with  
+   a set of Users  
+   a set of Projects  
+   an inactivity duration Limit
 
-	a set of Projects with  
-	   a set of Sessions  
-	  
-	a set of Sessions with  
-	   a Start time  
-	   an End time  
-	   a description String 
+a set of Projects with  
+   a set of Sessions  
+  
+a set of Sessions with  
+   a Start time  
+   an End time  
+   a description String 
 
 **actions**  
-	startSession(project: Project, time: Start, description: String): (session: Session)  
-	   **requires** the selected project exists  
-	   **effects** creates and returns a new session associated with the project 
+startSession(project: Project, time: Start, description: String): (session: Session)  
+   **requires** the selected project exists  
+   **effects** creates and returns a new session associated with the project 
 
-	endSession(session: Session, time: End time): (session: Session)  
-	   **requires** the selected session has a start time  
-	   **effects** returns an existing session with an end time
+endSession(session: Session, time: End time): (session: Session)  
+	**requires** the selected session has a start time  
+	**effects** returns an existing session with an end time
 
-	pauseSession(session: Session, duration: Limit): (time: End time): (session: Session)  
-	   **requires** the session has a start time but no end time and has reached the company’s duration limit  
-	   **effects** returns an existing session with an end time
+pauseSession(session: Session, duration: Limit): (time: End time): (session: Session)  
+	**requires** the session has a start time but no end time and has reached the company’s duration limit  
+	**effects** returns an existing session with an end time
 
-	resumeSession(session: Session, time: End time): (session: Session)  
-	   **requires** the session has a start time and end time  
-	   **effects** deletes the session’s end time and returns it  
-	
+resumeSession(session: Session, time: End time): (session: Session)  
+	**requires** the session has a start time and end time  
+	**effects** deletes the session’s end time and returns it  
+
 
 2. Conference Room Booking
 
 **concept** RoomReservation  
 **purpose** eliminating scheduling conflicts when reserving conference rooms  
 **principle** the department makes a set of slots available per room for the semester  
-and users can reserve a room for future use at a particular date and time;  
-the department can create and delete slots if they are unreserved;  
-users can edit reservations to reflect changes instead of having to cancel them.  
+			  and users can reserve a room for future use at a particular date and time;  
+			  the department can create and delete slots if they are unreserved;  
+			  users can edit reservations to reflect changes instead of having to cancel them.  
 	  
 **state**   
-	a Department with  
-	   a set of Rooms  
-	   an Administrator  
-	  
+a Department with  
+   a set of Rooms  
+   an Administrator  
+  
 a set of Rooms with  
-	   an occupancy Limit  
-	   a set of Slots
+   an occupancy Limit  
+   a set of Slots
 
-	a set of Slots with  
-	   a Date  
-	   a Time
+a set of Slots with  
+   a Date  
+   a Time
 
-	a set of Reservations with  
-	   a User  
-	   a party Size  
-	   a purpose String  
+a set of Reservations with  
+   a User  
+   a party Size  
+   a purpose String  
 	  
 **actions**  
-	reserve(user: User, room: Room, slot: Slot, count: Size, purpose: String): (r: Reservation)  
-	   **requires** the slot must be unreserved and the count must be at most the occupancy limit of the room  
-	   **effects** creates and returns a new reservation associated with the user and the slot
+reserve(user: User, room: Room, slot: Slot, count: Size, purpose: String): (r: Reservation)  
+   **requires** the slot must be unreserved and the count must be at most the occupancy limit of the room  
+   **effects** creates and returns a new reservation associated with the user and the slot
 
-	editReservation(user: User, r: Reservation, count: Size, purpose: String): (r: Reservation)  
-	   **requires** the reservation must exist and the new count must still be within the room’s occupancy limit  
-	   **effects** the reservation is updated to reflect a new headcount or purpose and returned
+editReservation(user: User, r: Reservation, count: Size, purpose: String): (r: Reservation)  
+   **requires** the reservation must exist and the new count must still be within the room’s occupancy limit  
+   **effects** the reservation is updated to reflect a new headcount or purpose and returned
 
-	cancelReservation(user: User, r: Reservation):  
-	   **requires** there must be an existing reservation associated with the user  
-	   **effects** the slot associated with that reservation is made available again
+cancelReservation(user: User, r: Reservation):  
+   **requires** there must be an existing reservation associated with the user  
+   **effects** the slot associated with that reservation is made available again
 
-	createSlot(room: Room, d: Date, t: Time): (slot: Slot)  
-	   **effects** creates a new slot associated with the room, date, and time
+createSlot(room: Room, d: Date, t: Time): (slot: Slot)  
+   **effects** creates a new slot associated with the room, date, and time
 
-	deleteSlot(slot: Slot):  
-	   **requires** no existing reservation in this slot    
+deleteSlot(slot: Slot):  
+   **requires** no existing reservation in this slot    
    **effects** removes Slot from the set of slots
 
 3. Electronic Boarding Pass
