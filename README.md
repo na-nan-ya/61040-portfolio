@@ -11,4 +11,5 @@ Some fun facts about me:
 
 # Table of Contents
 [Link to Assignment 1](assignments/6.1040%20assignment%201.pdf)
+<br />
 [Link to Problem Set 1](assignments/pset1.md)
