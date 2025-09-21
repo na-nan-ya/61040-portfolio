@@ -16,7 +16,8 @@ As the question states, using common dictionary words would increase the memorab
   **state**  
     a set of Contexts with  
       ***an unused set of Words***
-
+<br \>
+<br \>
 **Synchronizations for URL Shortening**
 
 1. *Partial matching*
@@ -42,7 +43,8 @@ Third sync *setExpiry:* No change.
 **sync** expire  
 **when** ExpiringResource.expireResource(): (resource: Resource)  
 **then** UrlShortening.delete(shortUrl: Resource)
-
+<br \>
+<br \>
 **Extending the design**
 
 1. *Additional concept designs*
@@ -56,7 +58,6 @@ a set of short Urls with
 	generateToken(shortUrl: ShortUrl, expiry: Expiration): (token: String)  
 	   **requires** the shortened URL must exist  
 	   **effects** generates and returns a string that expires at the same time as the shortUrl
-
 	registerToken(shortUrl: ShortUrl, token: String)  
 	   **requires** a shortening exists for shortUrl  
 	   **effects** saves the token and associates it with the shortUrl
