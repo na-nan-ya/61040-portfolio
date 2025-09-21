@@ -14,8 +14,8 @@ As the question states, using common dictionary words would increase the memorab
 
  **concept** NonceGeneration \[Context\]  
   **state**  
-    a set of Contexts with  
-      ***an unused set of Words***
+&nbsp;&nbsp;&nbsp;&nbsp;a set of Contexts with  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***an unused set of Words***
 <br />
 <br />
 **Synchronizations for URL Shortening**
