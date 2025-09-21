@@ -51,45 +51,45 @@ Third sync *setExpiry:* No change.
 
 **concept** UrlAnalyticsAccessToken  
 **state**  
-&nbsp;&nbsp;&nbsp;&nbsp;a set of short Urls with  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a unique token String  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an Expiration time  
+ a set of short Urls with  
+  a unique token String  
+  an Expiration time  
 **actions**  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generateToken(shortUrl: ShortUrl, expiry: Expiration): (token: String)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**requires** the shortened URL must exist  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**effects** generates and returns a string that expires at the same time as the shortUrl
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registerToken(shortUrl: ShortUrl, token: String)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**requires** a shortening exists for shortUrl  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**effects** saves the token and associates it with the shortUrl
+ generateToken(shortUrl: ShortUrl, expiry: Expiration): (token: String)  
+  **requires** the shortened URL must exist  
+  **effects** generates and returns a string that expires at the same time as the shortUrl
+ registerToken(shortUrl: ShortUrl, token: String)  
+  **requires** a shortening exists for shortUrl  
+  **effects** saves the token and associates it with the shortUrl
 
 **concept** UpdateUrlAnalytics  
 **state**  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a set of shortened Urls with  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an access count Number  
+ a set of shortened Urls with  
+  an access count Number  
 **actions**  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;incrementCount(shortUrl: ShortUrl):   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**requires** a shortening exists for shortUrl  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**effects** increments the count associated with the shortUrl
+ incrementCount(shortUrl: ShortUrl):   
+  **requires** a shortening exists for shortUrl  
+  **effects** increments the count associated with the shortUrl
 
 **concept** ViewUrlAnalytics  
 **state**  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a set of shortened Urls with  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a unique token String  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an access count Number  
+a set of shortened Urls with  
+ a unique token String  
+ an access count Number  
 **actions**  
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;viewCount(shortUrl: ShortUrl, token: String): (count: Number)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**requires** a shortening exists for shortUrl and the token must match the shortUrl  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**effects** returns the count associated with shortUrl
+ viewCount(shortUrl: ShortUrl, token: String): (count: Number)  
+  **requires** a shortening exists for shortUrl and the token must match the shortUrl  
+  **effects** returns the count associated with shortUrl
 
 2. *3 essential synchronizations with new concepts*
 
 **sync** registerToken  
 **when**   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UrlShortening.register(shortUrlSuffix: nonce, shortUrlBase, targetUrl): (shortUrl)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpiringResource.setExpiry(resource: shortUrl, seconds: 3600\)  
+ UrlShortening.register(shortUrlSuffix: nonce, shortUrlBase, targetUrl): (shortUrl)  
+ ExpiringResource.setExpiry(resource: shortUrl, seconds: 3600\)  
 **then**   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UrlAnalyticsAccessToken.generateToken(shortUrl, expiry: 3600): (token)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UrlAnalyticsAccessToken.registerToken(shortUrl, token)
+ UrlAnalyticsAccessToken.generateToken(shortUrl, expiry: 3600): (token)  
+ UrlAnalyticsAccessToken.registerToken(shortUrl, token)
 
 **sync** incrementCount  
 **when** UrlShortening.lookup(shortUrl): (targetUrl)  
