@@ -16,8 +16,8 @@ As the question states, using common dictionary words would increase the memorab
   **state**  
     a set of Contexts with  
       ***an unused set of Words***
-<br \>
-<br \>
+<br />
+<br />
 **Synchronizations for URL Shortening**
 
 1. *Partial matching*
@@ -43,8 +43,8 @@ Third sync *setExpiry:* No change.
 **sync** expire  
 **when** ExpiringResource.expireResource(): (resource: Resource)  
 **then** UrlShortening.delete(shortUrl: Resource)
-<br \>
-<br \>
+<br />
+<br />
 **Extending the design**
 
 1. *Additional concept designs*
