@@ -97,10 +97,10 @@ a set of body Maps with
    a set of Regions  
    a date Range
 
-	a set of Regions with  
-	   a frequency Number  
-	   a median score Number  
-	   a summary String     
+a set of Regions with  
+   a frequency Number  
+   a median score Number  
+   a summary String     
 **actions**   
 	sumRegion(period: Range, mapSet: Maps, region: Region): (score: Number, frequency: Number)  
 	   **requires** the Region must exist  
@@ -163,8 +163,8 @@ tracking. BodyMapGeneration manages per-user daily maps, as they are logged or s
 
 ***UI Sketches***
 
-\!\[Sketch 1: Main Features\] (assignments/sketches/sketch1\_features.png)  
-\!\[Sketch 2: Expanded Log Bar\] (assignments/sketches/sketch2\_logBar.png)
+![Sketch 1: Main Features](assignments/sketches/sketch1_features.png)
+![Sketch 2: Expanded Log Bar](assignments/sketches/sketch2_logBar.png)
 
 ***User Journey***
 
