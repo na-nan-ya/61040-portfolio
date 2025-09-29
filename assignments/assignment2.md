@@ -163,8 +163,8 @@ tracking. BodyMapGeneration manages per-user daily maps, as they are logged or s
 
 ***UI Sketches***
 
-![Sketch 1: Main Features](assignments/sketches/sketch1_features.png)
-![Sketch 2: Expanded Log Bar](assignments/sketches/sketch2_logBar.png)
+![Sketch 1: Main Features](sketches/sketch1_features.png)
+![Sketch 2: Expanded Log Bar](sketches/sketch2_logBar.png)
 
 ***User Journey***
 
