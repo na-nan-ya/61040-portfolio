@@ -16,4 +16,4 @@ Some fun facts about me:
 <br />
 [Link to Problem Set 2](assignments/pset2.md)
 <br />
-[Link to Assignment 2] (assignments/assignment2.md) 
+[Link to Assignment 2](assignments/assignment2.md) 
